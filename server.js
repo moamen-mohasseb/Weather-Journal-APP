@@ -24,7 +24,7 @@ function listining(){
 }
 
 //get route
-app.get("/all",senDate);
+app.get("/get",senDate);
 
 function senDate(req,res){
 	res.send(projectData);
@@ -36,10 +36,14 @@ function senDate(req,res){
 
 
 //post data
-app.post('/add',addTemp);
+app.post('/post',addTemp);
 
 function addTemp(req,res){
+	const newEntry={
+		temp:req.body.temp,
+		date:req.body.date,
+		content:req.body.content	}
 
- 	projectData.push(req.body);
+ 	projectData.push(newEntry);
     console.log(projectData);
 };

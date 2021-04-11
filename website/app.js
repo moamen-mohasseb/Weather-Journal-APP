@@ -18,11 +18,9 @@ getTemp(baseURL,zipcode, apiKey)
  .then(function(data){
     // Add data
     console.log(data);
-    postData('/add', {temp:data, date:newDate, content:feelings} );
+    postData('/post', {temp:data, date:newDate, content:feelings} );
+          updateUI()
   })
- .then(
-    updateUI()
-  )
 }
 const getTemp = async (baseURL, zipcode, key)=>{ 
 	console.log(baseURL+zipcode+key);
@@ -56,12 +54,12 @@ const postData = async ( url = '', data = {})=>{
 };
 
 const updateUI = async () => {
-  const request = await fetch('/all');
+    const request = await fetch('/get');
   try{
     const allData = await request.json();
     document.getElementById('date').innerHTML = "Date: "+allData[0].date;
-    document.getElementById('temp').innerHTML = "temp: "+allData[0].temp;
-    document.getElementById('content').innerHTML = "content: "+allData[0].content;
+    document.getElementById('temp').innerHTML = "Tempreture: "+allData[0].temp;
+    document.getElementById('content').innerHTML = "Content: "+allData[0].content;
 
   }catch(error){
     console.log("error", error);
